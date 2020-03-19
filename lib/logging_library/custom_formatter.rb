@@ -118,10 +118,20 @@ module LoggingLibrary
       alias_method :color_for_severity_lighter, :time_color_for_severity
 
       def show_time?
-        # When STDERR is redirected, we are likely running as a service with a
-        # syslog daemon already appending a timestamp to the line (and two
-        # timestamps is redundant).
-        tty? && !disable_timestamps?
+        if enable_timestamps?
+          # The user has explicitly asked for timestamps to be included
+          # in the output.
+          true
+        else
+          # When STDERR is redirected, we are likely running as a service with a
+          # syslog daemon already appending a timestamp to the line (and two
+          # timestamps is redundant).
+          tty? && !disable_timestamps?
+        end
+      end
+
+      def enable_timestamps?
+        ENV['LOGGING_LIBRARY_ENABLE_TIMESTAMPS']
       end
 
       def disable_timestamps?

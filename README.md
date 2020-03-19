@@ -58,6 +58,11 @@ end
   interactive/TTY mode. This setting can be useful in scenarios where you
   would otherwise get double timestamps on each line.
 
+- `LOGGING_LIBRARY_ENABLE_TIMESTAMPS` - similar to above, but does the
+  exact opposite. This is useful for scenarios where the automatic
+  heuristics is not suitable (for example, log output is being redirected
+  to `.log` file).
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then,
